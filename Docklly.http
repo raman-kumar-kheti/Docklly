@@ -1,6 +1,0 @@
-@Docklly_HostAddress = http://localhost:5058
-
-GET {{Docklly_HostAddress}}/weatherforecast/
-Accept: application/json
-
-###
