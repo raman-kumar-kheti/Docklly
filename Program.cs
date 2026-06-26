@@ -30,4 +30,5 @@ app.UseHttpsRedirection();
 
 //Register the middler ware here
 app.UseMiddleware<HttpCustomMiddleware>();
+app.MapControllers();
 app.Run();
