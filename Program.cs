@@ -15,7 +15,7 @@ builder.Services.AddControllers();
 builder.Services.AddDbContext<AppDbContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 
 //Services register,  now we can add multiple service to AddServiceScop all will register as clean code. 
-builder.Services.AddScoped<AddServiceScop>();
+builder.Services.AddServices();
 
 var app = builder.Build();
 

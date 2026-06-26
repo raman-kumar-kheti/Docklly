@@ -3,9 +3,9 @@ using Microsoft.AspNetCore;
 
 namespace Docklly.Extension
 {
-    public sealed class AddServiceScop 
+    public static class AddServiceScop
     {
-        public AddServiceScop(ServiceCollection services)
+        public static void AddServices(this IServiceCollection services)
         {
             services.AddScoped<UsersServices>();
         }
