@@ -14,8 +14,12 @@ namespace Docklly.Controllers
     {
         private readonly UsersServices _userService;
 
+        public UsersController(UsersServices userService)
+        {
+            _userService = userService;
+        }
+
         [HttpGet]
-        [Route("api/")]
         public List<UserResponseDto> GetAllUser()
         {
             List<Users> users = _userService.GetAllUsers();

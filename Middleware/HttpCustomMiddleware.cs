@@ -11,11 +11,11 @@ namespace Docklly.Middleware
             _next = next;
         }
 
-        public void GetHttpContext(HttpContext context)
+        public async Task InvokeAsync(HttpContext context)
         {
             var getHeader = context.Request.Headers;
             Console.WriteLine(getHeader);
-            _next(context);
+            await _next(context);
         }
     }
 
