@@ -5,7 +5,12 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Docklly.Models
 {
+    /// <summary>
+    /// Represents a user in the Docklly system with role-based access
+    /// </summary>
+    [Index(nameof(Email), Name = "IX_Users_Email", IsUnique = true)]
     [Index(nameof(Id), Name = "IX_Users_Id")]
+    [Table("Users")]
     public class Users
     {
         [Key]
@@ -13,20 +18,43 @@ namespace Docklly.Models
 
         [EmailAddress]
         [Required]
-        public string Email { get; set; }
-        public string Name { get; set; }
+        [StringLength(255)]
+        public string Email { get; set; } = string.Empty;
 
         [Required]
-        [Column("Password_Hash")]
-        public string PasswordHash { get; set; }
+        [StringLength(100)]
+        public string Name { get; set; } = string.Empty;
 
-        [Column("Is_Active")]
-        public bool IsActive { get; set; }
+        [Required]
+        [Column("PasswordHash")]
+        [StringLength(512)]
+        public string PasswordHash { get; set; } = string.Empty;
 
-        [Column("Create_At")]
-        public DateTime CreatedAt { get; set; }
+        [Column("Role")]
+        [StringLength(50)]
+        public string Role { get; set; } = "Viewer"; // Admin, Attorney, Paralegal, Reviewer, Viewer
 
-        [Column("Updated_At")]
-        public DateTime UpdatedAt { get; set; }
+        [Column("Department")]
+        [StringLength(100)]
+        public string? Department { get; set; }
+
+        [Column("IsActive")]
+        public bool IsActive { get; set; } = true;
+
+        [Column("EmailVerified")]
+        public bool EmailVerified { get; set; } = false;
+
+        [Column("CreatedAt")]
+        public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
+
+        [Column("UpdatedAt")]
+        public DateTime UpdatedAt { get; set; } = DateTime.UtcNow;
+
+        [Column("LastLoginAt")]
+        public DateTime? LastLoginAt { get; set; }
+
+        // Navigation properties
+        public ICollection<AuditLog>? AuditLogs { get; set; } = new List<AuditLog>();
+        public ICollection<DocumentAccess>? DocumentAccesses { get; set; } = new List<DocumentAccess>();
     }
 }
